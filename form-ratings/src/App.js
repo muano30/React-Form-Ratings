@@ -3,46 +3,57 @@ import './App.css';
 import React, {useState} from 'react';
 
 function Form(){
-const [formRating, setFormRating] = useState({
-  rating:""
-})
+const [formRating, setFormRating] = useState(
+ "",
+)
 
-  const [ratingList, setRatingList] = useState([])
- 
-const handleChange = (e) => {
-  // const getRating = (ratingNumber) => {
-  //    var starRatings = ["*" , "*" , "*" , "*" , "*" , "*" , "*" , "*" , "*" , "*" , "*"]
-  //   return starRatings.slice(0 , ratingNumber).join("")
-  setFormRating({
-    ...formRating, [e.target.rating]: e.target.value})
+const [ratingList, setRatingList] = useState([])
+
+const getRating = (ratingNumber) => {
+  var ratings = []
+  for( var i = 0 ; i < ratingNumber ; i++ ){
+      console.log(i)
+      ratings.push("*")
+  }
+
+  return ratings
 }
+
 const handleSubmit = (e) => {
   e.preventDefault();
-  setRatingList([...ratingList, formRating])
-
+  if(+formRating <= 10){
+    setRatingList([...ratingList, getRating(+formRating) ])
+  }
+  setFormRating('')
+  // console.log('rating',  formRating)
+  
 }
 
   return (
-    <div>
-      <form onClick={handleSubmit}>
-        {/* <label>Rating:</label> */}
+    <div className="form">
+      <h1 className="h1">Form Ratings checker</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="label">
+        <label>Rating :</label>
+        </div>
+
         <input placeholder="Rating"
          type="number"
-         onChange={handleChange}
-         rating = "rating" 
-         value={formRating.rating}/>
-        <button type="submit">Submit</button>
+         onChange={(e)=> setFormRating(e.target.value)}
+        name = "formRating" 
+         value={formRating}/>
+        <button type="submit" >Submit</button>
       </form>
 
-      <ul> 
-        {ratingList.map((item) => {
+      <ol> 
+        {ratingList.map((item,index) => {
                     return(
-                    <li>
-                        <h2>{item.rating}</h2>
+                    <li key={index}>
+                        <h2>{item}</h2>
                     </li>)
                 })}     
-            </ul>
-
+            </ol>
+      
     </div>
   );
 }
