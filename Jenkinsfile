@@ -3,16 +3,19 @@ pipeline {
      stages {
         stage("Build") {
             steps {
-                sh "sudo rm -rf /var/www/jenkins"
                 sh "git clone https://github.com/muano30/React-Form-Ratings.git"
                 sh "sudo npm install"
                 sh "sudo npm run build"
             }
         }
+            stage("Test") {
+            steps {
+                echo "Hello, Jenkins"
+            }
+        }
         stage("Deploy") {
             steps {
-                sh "sudo rm -rf /var/www/jenkins"
-                // sh "sudo cp -r ${WORKSPACE}/build/ /var/www/jenkins-react-app/"
+                echo "Hello, Final Stage"
             }
         }
     }
