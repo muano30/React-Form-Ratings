@@ -8,14 +8,14 @@ pipeline {
                 sh "sudo npm run build"
             }
         }
-            stage("Test") {
+            stage("Deploy") {
             steps {
-                echo "Hello, Jenkins"
+                echo " Hello"
             }
         }
         stage("Deploy") {
             steps {
-                echo "Hello, Final Stage"
+                sh "sudo rm -rf /var/lib/jenkins/workspace/jenkins-testing"
             }
         }
     }
