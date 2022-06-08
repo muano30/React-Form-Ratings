@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 
@@ -20,17 +19,17 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log('something', formRating)
-    if(formRating === ''){
+    if (formRating === '') {
       return
-    }else{
+    } else {
 
-    
-    if (+formRating <= 10) {
-      setRatingList([...ratingList, getRating(+formRating)])
+
+      if (+formRating <= 10) {
+        setRatingList([...ratingList, getRating(+formRating)])
+      }
+      setFormRating('')
+      // console.log('rating',  formRating)
     }
-    setFormRating('')
-    // console.log('rating',  formRating)
-  }
   }
 
   return (
